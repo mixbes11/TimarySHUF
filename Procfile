@@ -1,0 +1,1 @@
+web: gunicorn Timary.__main__:app

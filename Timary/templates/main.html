@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link href="../static/css/main.css" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+{% if len_task == 0 %}
+    <p class="text">Нажмите + чтобы добавить расписание</p>
+
+{% else %}
+
+<table align="center" cellpadding="100%" bgcolor="#FCE8B6" bordercolor="#FFFFFF" frame="border"
+ rules="all">
+
+    {% if num_of_week != '-2' %}
+    <a href="/timetable/{{ previous_num }}"><img src="../static/img/arrow_previous.jpg" alt="" style="width: 100px; height: 100px; float:left"></img></a>
+   {% else %}
+    <img src="../static/img/rectangle_next.jpg" alt="" style="width: 100px; height: 100px; float:left"></img>
+    {% endif %}
+    <tr bgcolor="#FFFFFF">
+        <th width="5%">День недели</th>
+        <th>Урок</th>
+        <th>Время</th>
+        <th>Кабинет</th>
+        <th>Неделя</th>
+        <th>Изменить/удалить</th>
+   </tr>
+    {% if len_lesson1 == 0 %}
+    <tr>
+        <th> Пн</th>
+        <th> -</th>
+        <th> -</th>
+        <th> -</th>
+        <th> {{ message_of_week }}</th>
+    </tr>
+    {% else %}
+    {% for i in range(len_lesson1) %}
+    <tr>
+        {% if i == 0 %}
+        <th rowspan={{ len_lesson1 }}> Пн</th>
+        {% endif %}
+        <th> {{ lessons1[i].lesson }}</th>
+        <th> {{ lessons1[i].time }}</th>
+        <th> {{ lessons1[i].room }}</th>
+        <th> {{ message_of_week }}</th>
+        <th><a href="/add_timetable/{{ lessons1[i].lesson_id }}"> Изменить</a></th>
+   </tr>
+    {% endfor %}
+    {% endif %}
+
+    {% if len_lesson2 == 0 %}
+    <tr>
+        <th> Вт</th>
+        <th> -</th>
+        <th> -</th>
+        <th> -</th>
+        <th> {{ message_of_week }}</th>
+    </tr>
+    {% else %}
+    {% for i in range(len_lesson2) %}
+    <tr>
+        {% if i == 0 %}
+        <th rowspan={{ len_lesson2 }}> Вт</th>
+        {% endif %}
+        <th> {{ lessons2[i].lesson }}</th>
+        <th> {{ lessons2[i].time }}</th>
+        <th> {{ lessons2[i].room }}</th>
+        <th> {{ message_of_week }}</th>
+        <th><a href="/add_timetable/{{ lessons2[i].lesson_id }}"> Изменить</a></th>
+   </tr>
+    {% endfor %}
+    {% endif %}
+
+    {% if len_lesson3 == 0 %}
+    <tr>
+        <th> Ср</th>
+        <th> -</th>
+        <th> -</th>
+        <th> -</th>
+        <th> {{ message_of_week }}</th>
+    </tr>
+    {% else %}
+    {% for i in range(len_lesson3) %}
+    <tr>
+        {% if i == 0 %}
+        <th rowspan={{ len_lesson3 }}> Ср</th>
+        {% endif %}
+        <th> {{ lessons3[i].lesson }}</th>
+        <th> {{ lessons3[i].time }}</th>
+        <th> {{ lessons3[i].room }}</th>
+        <th> {{ message_of_week }}</th>
+        <th><a href="/add_timetable/{{ lessons3[i].lesson_id }}"> Изменить</a></th>
+   </tr>
+    {% endfor %}
+    {% endif %}
+
+    {% if len_lesson4 == 0 %}
+    <tr>
+        <th> Чт</th>
+        <th> -</th>
+        <th> -</th>
+        <th> -</th>
+        <th> {{ message_of_week }}</th>
+    </tr>
+    {% else %}
+    {% for i in range(len_lesson4) %}
+    <tr>
+        {% if i == 0 %}
+        <th rowspan={{ len_lesson4 }}> Чт</th>
+        {% endif %}
+        <th> {{ lessons4[i].lesson }}</th>
+        <th> {{ lessons4[i].time }}</th>
+        <th> {{ lessons4[i].room }}</th>
+        <th> {{ message_of_week }}</th>
+        <th><a href="/add_timetable/{{ lessons4[i].lesson_id }}"> Изменить</a></th>
+   </tr>
+    {% endfor %}
+    {% endif %}
+
+    {% if len_lesson5 == 0 %}
+    <tr>
+        <th> Пт</th>
+        <th> -</th>
+        <th> -</th>
+        <th> -</th>
+        <th> {{ message_of_week }}</th>
+    </tr>
+    {% else %}
+    {% for i in range(len_lesson5) %}
+    <tr>
+        {% if i == 0 %}
+        <th rowspan={{ len_lesson5 }}> Пт</th>
+        {% endif %}
+        <th> {{ lessons5[i].lesson }}</th>
+        <th> {{ lessons5[i].time }}</th>
+        <th> {{ lessons5[i].room }}</th>
+        <th> {{ message_of_week }}</th>
+        <th><a href="/add_timetable/{{ lessons5[i].lesson_id }}"> Изменить</a></th>
+   </tr>
+    {% endfor %}
+    {% endif %}
+
+    {% if len_lesson6 == 0 %}
+    <tr>
+        <th> Сб</th>
+        <th> -</th>
+        <th> -</th>
+        <th> -</th>
+        <th> {{ message_of_week }}</th>
+    </tr>
+    {% else %}
+    {% for i in range(len_lesson6) %}
+    <tr>
+        {% if i == 0 %}
+        <th rowspan={{ len_lesson6 }}> Сб</th>
+        {% endif %}
+        <th> {{ lessons6[i].lesson }}</th>
+        <th> {{ lessons6[i].time }}</th>
+        <th> {{ lessons6[i].room }}</th>
+        <th> {{ message_of_week }}</th>
+        <th><a href="/add_timetable/{{ lessons6[i].lesson_id }}"> Изменить</a></th>
+   </tr>
+    {% endfor %}
+    {% endif %}
+    {% if num_of_week != '2' %}
+    <a href="/timetable/{{ next_num }}"><img src="../static/img/arrow_next.jpg" alt="" style="width: 100px; height: 100px; float:right"></img></a>
+    {% else %}
+    <img src="../static/img/rectangle_next.jpg" alt="" style="width: 100px; height: 100px; float:right"></img>
+    {% endif %}
+
+{% endif %}
+
+{% endblock %}
+
+    <script>
+        document.addEventListener('keydown', function(event) {
+      if (event.key === 'F1') {
+        event.preventDefault(); // Отключаем стандартное поведение F1 (например, открытие справки браузера)
+        // alert("Это ваша собственная справка!\nF1 работает!");
+        window.open('/static/drExplain/opisanie_operatsij.htm', "_blank")
+        // Можно заменить alert на модальное окно с полной информацией
+      }
+    });
+    </script>

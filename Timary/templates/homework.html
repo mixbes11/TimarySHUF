@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <title>Timary project - официальный сайт</title>
+        <link rel="shortcut icon" href="../static/img/favicon.ico" type="image/x-icon">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Open+Sans&family=Raleway:wght@100&family=Roboto&display=swap" rel="stylesheet">
+        <meta name="keywords" content="школа обучение дистанционное образование расписание план Timary timary дневник блокнот ежедневник " />
+        <link href="../static/css/main.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <header class="up-block">
+             <div class="fixed-container">
+                <nav class="up-text">
+                    <img src="../static/img/146__2.jpg" style="width: 5%; height: 5%; margin: auto 0";></img>
+                    <a href="/add_homework/0" style="padding: 0 3% 0 0">+</a>
+                    <img src="../static/img/timetable.png" style="width: 5%; height: 5%; margin: auto 0";></img>
+                    <a href="/timetable/0" style="padding: 0 3% 0 0">Раcписание</a>
+                    <img src="../static/img/homework.png" style="width: 5%; height: 5%; margin: auto 0"></img>
+                    <a href="/homework/0" style="padding: 0 3% 0 0"><u>Домашнее задание</u></a>
+                    {% if current_user.is_authenticated %}
+                    <a href="/user_info">{{ current_user.name }}</a>
+                    {% else %}
+                    <a href="/register"> Вход/Регистрация </a>
+                    {% endif %}
+
+                </nav>
+             </div>
+        </header>
+
+         <script>
+        document.addEventListener('keydown', function(event) {
+      if (event.key === 'F1') {
+        event.preventDefault(); // Отключаем стандартное поведение F1 (например, открытие справки браузера)
+        // alert("Это ваша собственная справка!\nF1 работает!");
+        window.open('/static/drExplain/opisanie_operatsij.htm', "_blank")
+        // Можно заменить alert на модальное окно с полной информацией
+      }
+    });
+    </script>
+
+
+
+
+        {% if len_task == 0 %}
+    <p class="text">Нажмите + чтобы добавить задание</p>
+
+
+        {% else %}
+
+<table align="center" cellpadding="100%" bgcolor="#FCE8B6" bordercolor="#FFFFFF" frame="border"
+ rules="all">
+    {% if num_of_week != '-2' %}
+    <a href="/homework/{{ previous_num }}"><img src="../static/img/arrow_previous.jpg" alt="" style="width: 100px; height: 100px; float:left"></img></a>
+    {% else %}
+    <img src="../static/img/rectangle_next.jpg" alt="" style="width: 100px; height: 100px; float:left"></img>
+    {% endif %}
+    <tr bgcolor="#FFFFFF">
+        <th width="5%">День недели</th>
+        <th>Урок</th>
+        <th>Задание</th>
+        <th>Неделя</th>
+        <th>Готово?</th>
+        <th>Изменить/удалить</th>
+   </tr>
+    {% if len_task1 == 0 %}
+    <tr>
+        <th> Пн</th>
+        <th> -</th>
+        <th> -</th>
+        <th> {{ message_of_week }}</th>
+        <th> -</th>
+    </tr>
+    {% else %}
+    {% for i in range(len_task1) %}
+    <tr>
+        {% if i == 0 %}
+        <th rowspan={{ len_task1 }}> Пн</th>
+        {% endif %}
+        <th> {{ tasks1[i].lesson }}</th>
+        <th> {{ tasks1[i].task }}</th>
+        <th> {{ message_of_week }}</th>
+        <th> {{ tasks1[i].ready }}</th>
+        <th><a href="/add_homework/{{ tasks1[i].homework_id }}"> Изменить</a></th>
+   </tr>
+    {% endfor %}
+    {% endif %}
+
+    {% if len_task2 == 0 %}
+    <tr>
+        <th> Вт</th>
+        <th> -</th>
+        <th> -</th>
+        <th> {{ message_of_week }}</th>
+        <th> -</th>
+    </tr>
+    {% else %}
+    {% for i in range(len_task2) %}
+    <tr>
+        {% if i == 0 %}
+        <th rowspan={{ len_task2 }}> Вт</th>
+        {% endif %}
+        <th> {{ tasks2[i].lesson }}</th>
+        <th> {{ tasks2[i].task }}</th>
+        <th> {{ message_of_week }}</th>
+        <th> {{ tasks2[i].ready }}</th>
+        <th><a href="/add_homework/{{ tasks2[i].homework_id }}"> Изменить</a></th>
+   </tr>
+    {% endfor %}
+    {% endif %}
+
+    {% if len_task3 == 0 %}
+    <tr>
+        <th> Ср</th>
+        <th> -</th>
+        <th> -</th>
+        <th> {{ message_of_week }}</th>
+        <th> -</th>
+    </tr>
+    {% else %}
+    {% for i in range(len_task3) %}
+    <tr>
+        {% if i == 0 %}
+        <th rowspan={{ len_task3 }}> Ср</th>
+        {% endif %}
+        <th> {{ tasks3[i].lesson }}</th>
+        <th> {{ tasks3[i].task }}</th>
+        <th> {{ message_of_week }}</th>
+        <th> {{ tasks3[i].ready }}</th>
+        <th><a href="/add_homework/{{ tasks3[i].homework_id }}"> Изменить</a></th>
+   </tr>
+    {% endfor %}
+    {% endif %}
+
+    {% if len_task4 == 0 %}
+    <tr>
+        <th> Чт</th>
+        <th> -</th>
+        <th> -</th>
+        <th> {{ message_of_week }}</th>
+        <th> -</th>
+    </tr>
+    {% else %}
+    {% for i in range(len_task4) %}
+    <tr>
+        {% if i == 0 %}
+        <th rowspan={{ len_task4 }}> Чт</th>
+        {% endif %}
+        <th> {{ tasks4[i].lesson }}</th>
+        <th> {{ tasks4[i].task }}</th>
+        <th> {{ message_of_week }}</th>
+        <th> {{ tasks4[i].ready }}</th>
+        <th><a href="/add_homework/{{ tasks4[i].homework_id }}"> Изменить</a></th>
+   </tr>
+    {% endfor %}
+    {% endif %}
+
+    {% if len_task5 == 0 %}
+    <tr>
+        <th> Пт</th>
+        <th> -</th>
+        <th> -</th>
+        <th> {{ message_of_week }}</th>
+        <th> -</th>
+    </tr>
+    {% else %}
+    {% for i in range(len_task5) %}
+    <tr>
+        {% if i == 0 %}
+        <th rowspan={{ len_task5 }}> Пт</th>
+        {% endif %}
+        <th> {{ tasks5[i].lesson }}</th>
+        <th> {{ tasks5[i].task }}</th>
+        <th> {{ message_of_week }}</th>
+        <th> {{ tasks5[i].ready }}</th>
+        <th><a href="/add_homework/{{ tasks5[i].homework_id }}"> Изменить</a></th>
+   </tr>
+    {% endfor %}
+    {% endif %}
+
+    {% if len_task6 == 0 %}
+    <tr>
+        <th> Сб</th>
+        <th> -</th>
+        <th> -</th>
+        <th> {{ message_of_week }}</th>
+        <th> -</th>
+    </tr>
+    {% else %}
+    {% for i in range(len_task6) %}
+    <tr>
+        {% if i == 0 %}
+        <th rowspan={{ len_task6 }}> Сб</th>
+        {% endif %}
+        <th> {{ tasks6[i].lesson }}</th>
+        <th> {{ tasks6[i].task }}</th>
+        <th> {{ message_of_week }}</th>
+        <th> {{ tasks6[i].ready }}</th>
+        <th><a href="/add_homework/{{ tasks6[i].homework_id }}"> Изменить</a></th>
+   </tr>
+    {% endfor %}
+    {% endif %}
+
+    {% if num_of_week != '2' %}
+    <a href="/homework/{{ next_num }}"><img src="../static/img/arrow_next.jpg" alt="" style="width: 100px; height: 100px; float:right"></img></a>
+    {% else %}
+    <img src="../static/img/rectangle_next.jpg" alt="" style="width: 100px; height: 100px; float:right"></img>
+    {% endif %}
+    {% endif %}
+    </body>
+</html>

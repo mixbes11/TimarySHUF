@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link href="../static/css/register.css" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+<div class="parent">
+    <div class="registration">
+<b> Зарегистрироваться </b>
+    <form action="" method="post" class="form-w">
+    {{ form.hidden_tag() }}
+            {{ form.csrf_token }}
+            {% if message %}
+            <div class="text-register">{{message}}</div>
+            {% endif %}
+
+
+            {{ form.login(class="form-control") }}
+            {% for error in form.login.errors %}
+                <p class="text-register" role="alert">
+                    {{ error }}
+                </p>
+            {% endfor %}
+
+            {{ form.name(class="form-control") }}
+            {% for error in form.name.errors %}
+                <p class="text-register" role="alert">
+                    {{ error }}
+                </p>
+            {% endfor %}
+
+            {{ form.password(class="form-control") }}
+            {% for error in form.password.errors %}
+                <p class="text-register" role="alert">
+                    {{ error }}
+                </p>
+            {% endfor %}
+
+            {{ form.email(class="form-control", type="email") }}
+            {% for error in form.email.errors %}
+                <p class="text-register" role="alert">
+                    {{ error }}
+                </p>
+            {% endfor %}
+
+
+
+            {{ form.submit(type="submit", class="register-button") }}
+    </form>
+    <text class = "link"> Уже зарегистрированы? <a href ="/login"> Войти </a> </text>
+    </div>
+</div>>
+
+{% endblock %}
+
+<script>
+        document.addEventListener('keydown', function(event) {
+      if (event.key === 'F1') {
+        event.preventDefault(); // Отключаем стандартное поведение F1 (например, открытие справки браузера)
+        // alert("Это ваша собственная справка!\nF1 работает!");
+        window.open('/static/drExplain/opisanie_operatsij.htm', "_blank")
+        // Можно заменить alert на модальное окно с полной информацией
+      }
+    });
+    </script>

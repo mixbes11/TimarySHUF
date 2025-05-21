@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <title>Timary project - официальный сайт</title>
+        <link rel="shortcut icon" href="../static/img/favicon.ico" type="image/x-icon">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Open+Sans&family=Raleway:wght@100&family=Roboto&display=swap" rel="stylesheet">
+        <meta name="keywords" content="школа обучение дистанционное образование расписание план Timary timary дневник блокнот ежедневник " />
+        {% block head %}
+        {% endblock %}
+    </head>
+    <body>
+        <header class="up-block">
+             <div class="fixed-container">
+                <nav class="up-text">
+                    <img src="../static/img/146__2.jpg" style="width: 5%; height: 5%; margin: auto 0";></img>
+                    <a href="/add_timetable/0" style="padding: 0 3% 0 0">+</a>
+                    <img src="../static/img/timetable.png" style="width: 5%; height: 5%; margin: auto 0";></img>
+                    <a href="/timetable/0" style="padding: 0 3% 0 0"><u>Раcписание</u></a>
+                    <img src="../static/img/homework.png" style="width: 5%; height: 5%; margin: auto 0"></img>
+                    <a href="/homework/0" style="padding: 0 3% 0 0">Домашнее задание</a>
+                    {% if current_user.is_authenticated %}
+                    <a href="/user_info">{{ current_user.name }}</a>
+                    {% else %}
+                    <a href="/register"> Вход/Регистрация </a>
+                    {% endif %}
+                    
+                </nav>
+             </div>
+        </header>
+
+    {% block content %}
+        {% endblock %}
+
+    <script>
+        document.addEventListener('keydown', function(event) {
+      if (event.key === 'F1') {
+        event.preventDefault(); // Отключаем стандартное поведение F1 (например, открытие справки браузера)
+        // alert("Это ваша собственная справка!\nF1 работает!");
+        window.open('/static/drExplain/opisanie_operatsij.htm', "_blank")
+        // Можно заменить alert на модальное окно с полной информацией
+      }
+    });
+    </script>
+
+
+
+    </body>
+</html>

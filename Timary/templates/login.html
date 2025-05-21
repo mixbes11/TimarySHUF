@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link href="../static/css/register.css" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+    <div class="parent">
+            <div class="auth">
+                <b> Авторизоваться </b>
+                <form class="card-body" method="POST">
+                    {% if message1 %}
+            <div class="text">{{ message1 }}</div>
+            {% endif %}
+
+            {{ form1.hidden_tag() }}
+
+            {% for error in form1.login.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+            <div class="form-group">
+                {{ form1.login(class="form-control") }}
+            </div>
+
+            {% for error in form1.password.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+            <div class="form-group">
+                {{ form1.password(class="form-control") }}
+            </div>
+
+
+            {{ form1.submit() }}
+                 </form>
+            </div>
+    </div>
+
+{% endblock %}
+
+<script>
+        document.addEventListener('keydown', function(event) {
+      if (event.key === 'F1') {
+        event.preventDefault(); // Отключаем стандартное поведение F1 (например, открытие справки браузера)
+        // alert("Это ваша собственная справка!\nF1 работает!");
+        window.open('/static/drExplain/opisanie_operatsij.htm', "_blank")
+        // Можно заменить alert на модальное окно с полной информацией
+      }
+    });
+    </script>

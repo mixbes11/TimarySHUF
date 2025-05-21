@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link href="../static/css/register.css" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+<div class="parent">
+    <div class="auth">
+    <b>Изменить данные аккаунта</b>
+    <form class="card-body" method="POST">
+        {% if message %}
+        <div class="text">{{ message }}</div>
+        {% endif %}
+
+        {{ form.hidden_tag() }}
+
+        {% for error in form.login.errors %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endfor %}
+        <div class="form-group">
+            {{ form.login(class="form-control") }}
+        </div>
+
+
+        {% for error in form.name.errors %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endfor %}
+        <div class="form-group">
+            {{ form.name(class="form-control") }}
+        </div>
+
+
+        {% for error in form.email.errors %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endfor %}
+        <div class="form-group">
+            {{ form.email(class="form-control") }}
+        </div>
+
+
+        {% for error in form.password.errors %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endfor %}
+        <div class="form-group">
+            {{ form.password(class="form-control") }}
+        </div>
+
+
+        {{ form.submit() }}
+             </form>
+        </div>
+</div>
+
+
+<script>
+        document.addEventListener('keydown', function(event) {
+      if (event.key === 'F1') {
+        event.preventDefault(); // Отключаем стандартное поведение F1 (например, открытие справки браузера)
+        // alert("Это ваша собственная справка!\nF1 работает!");
+        window.open('/static/drExplain/opisanie_operatsij.htm', "_blank")
+        // Можно заменить alert на модальное окно с полной информацией
+      }
+    });
+    </script>
+
+{% endblock %}
