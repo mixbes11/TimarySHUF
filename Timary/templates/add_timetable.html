@@ -7,6 +7,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link rel="stylesheet" href="../static/css/add_timetable.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Open+Sans&family=Raleway:wght@100&family=Roboto&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
     </head>
     <body>
         <header class="up-block">
@@ -56,27 +57,44 @@
             {% endfor %}
             {{ form.room(class="in-put", size="40") }}</h1>
 
-            <h1>{% for error in form.day_of_week.errors %}
+            <hr width="100%" size="2" color="#000000" />
+            <h1>{% for error in form.date.errors %}
                 <div class="alert alert-danger">{{ error }}</div>
             {% endfor %}
-            {{ form.day_of_week(class="in-put") }}</h1>
+            {{ form.date(class="in-put", type="text") }}</h1>
             <hr width="100%" size="2" color="#000000" />
 
-            <h1>{% for error in form.num_of_week.errors %}
+            <h1>Время: 
+            {% for error in form.hour.errors %}
                 <div class="alert alert-danger">{{ error }}</div>
             {% endfor %}
-            {{ form.num_of_week(class="in-put") }}</h1>
-            <hr width="100%" size="2" color="#000000" />
-
-            <h1>{% for error in form.time.errors %}
+            {{ form.hour(class="in-put", type="number", min="0", max="23", style="width: 100px;") }}
+            :
+            {% for error in form.minute.errors %}
                 <div class="alert alert-danger">{{ error }}</div>
             {% endfor %}
-            {{ form.time(class="in-put", type="time") }}</h1>
+            {{ form.minute(class="in-put", type="number", min="0", max="59", style="width: 100px;") }}
+            </h1>
             <hr width="100%" size="2" color="#000000" />
 
             <br>
 
             {{ form.submit(class="btn btn-success") }}
         </form>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ru.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('#date').datepicker({
+                    format: 'dd.mm.yyyy',
+                    language: 'ru',
+                    autoclose: true,
+                    todayHighlight: true,
+                    orientation: 'top'
+                });
+            });
+        </script>
     </body>
 </html>
